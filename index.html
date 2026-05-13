@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>WE GO · GO Seniors · L1 · U1 · Session 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { font-family: 'Barlow', 'Segoe UI', system-ui, sans-serif; background: #05046A; color: #fff; display: flex; flex-direction: column; }
+
+/* NAV */
+.nav-bar { height: 52px; background: rgba(5,4,106,0.97); padding: 0 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid rgba(241,196,5,0.4); z-index: 100; flex-shrink: 0; }
+.nav-btn { background: #F1C405; border: none; color: #05046A; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; font-weight: 900; }
+.nav-btn:hover { background: #d4a800; }
+.nav-btn:disabled { background: rgba(255,255,255,0.1); color: white; cursor: not-allowed; }
+.nav-pills { display: flex; gap: 5px; flex: 1; margin: 0 8px; overflow-x: auto; scrollbar-width: none; }
+.nav-pills::-webkit-scrollbar { display: none; }
+.nav-pill { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); padding: 5px 10px; border-radius: 20px; cursor: pointer; font-size: 10px; font-weight: 600; white-space: nowrap; flex-shrink: 0; transition: all 0.2s; }
+.nav-pill.active { background: #F1C405; color: #05046A; border-color: #F1C405; }
+.nav-pill:hover { background: rgba(241,196,5,0.3); }
+
+/* SLIDES */
+.slides-wrapper { flex: 1; width: 100%; position: relative; overflow: hidden; }
+.slide { display: none; width: 100%; height: 100%; flex-direction: column; overflow: hidden; position: absolute; top: 0; left: 0; }
+.slide.active { display: flex; }
+
+/* TOP HEADER */
+.top-header { padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; min-height: 50px; }
+.header-left { display: flex; align-items: center; gap: 10px; }
+.header-tag { font-size: 10px; font-weight: 700; color: #05046A; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.header-title { font-size: 15px; font-weight: 800; color: white; }
+.header-right { display: flex; align-items: center; gap: 8px; }
+.slide-counter { background: rgba(241,196,5,0.15); border: 1px solid rgba(241,196,5,0.4); color: #F1C405; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.book-page { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+
+/* COVER */
+#slide-0 { background: #05046A; }
+.cover-image-container { flex: 1; position: relative; overflow: hidden; min-height: 0; }
+.cover-image-container img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.cover-info-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(5,4,106,0.55) 0%, rgba(5,4,106,0.1) 60%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-start; padding: 24px; }
+.cover-label { font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px; }
+.cover-title { font-family: 'Barlow', sans-serif; font-size: clamp(36px, 6vw, 64px); font-weight: 900; color: #fff; line-height: 1.05; margin-bottom: 8px; }
+.cover-title span { color: #F1C405; }
+.cover-meta { font-family: 'Barlow', sans-serif; font-size: 16px; color: rgba(255,255,255,0.85); font-weight: 600; }
+.cover-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 10px; background: rgba(5,4,106,0.97); flex-shrink: 0; }
+.cover-btn { border: none; color: #fff; padding: 12px 8px; border-radius: 12px; cursor: pointer; text-align: center; transition: all 0.2s; }
+.cover-btn:hover { filter: brightness(1.2); transform: translateY(-2px); }
+.cover-btn-label { display: block; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700; line-height: 1.3; color: #fff; }
+.cover-btn-sub { display: block; font-family: 'Barlow', sans-serif; font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.8); margin-top: 2px; }
+
+/* SLIDE BODY */
+.slide-body { flex: 1; overflow-y: auto; padding: 16px; }
+
+/* ===== WARM-UP: TIME MACHINE ===== */
+#slide-1 { background: linear-gradient(140deg, #05046A, #07068A); }
+.time-machine-layout { display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.tm-eras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; flex: 1; min-height: 0; }
+.tm-era { border-radius: 14px; overflow: hidden; position: relative; cursor: pointer; transition: transform 0.2s; border: 3px solid transparent; }
+.tm-era:hover { transform: scale(1.02); }
+.tm-era.selected { border-color: #F1C405; }
+.tm-era img { width: 100%; height: 100%; object-fit: cover; }
+.tm-era-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(5,4,106,0.9)); padding: 20px 12px 10px; }
+.tm-era-year { font-size: 22px; font-weight: 900; color: #F1C405; }
+.tm-era-name { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 600; }
+.tm-template { background: rgba(255,255,255,0.08); border: 2px solid rgba(241,196,5,0.4); border-radius: 12px; padding: 14px 20px; text-align: center; flex-shrink: 0; }
+.tm-template-text { font-size: 18px; font-weight: 700; color: white; }
+.tm-template-text span { color: #F1C405; font-style: italic; }
+.tm-reasons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
+.tm-reason { background: rgba(241,196,5,0.15); border: 1px solid rgba(241,196,5,0.4); color: #F1C405; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.tm-reason:hover, .tm-reason.active { background: #F1C405; color: #05046A; }
+
+/* ===== VOCAB: PRONOUNS ===== */
+#slide-2 { background: linear-gradient(135deg, #05046A 0%, #0a0a8a 100%); }
+.vocab-container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 12px 16px; width: 100%; overflow: hidden; }
+.vocab-title { font-size: 28px; font-weight: 900; color: #F1C405; margin-bottom: 12px; text-align: center; flex-shrink: 0; }
+.pronouns-container { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; max-width: 1400px; height: 100%; overflow: hidden; }
+.pron-column { display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+.pron-column-title { font-size: 16px; font-weight: 800; color: #39D4FA; text-align: center; text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; }
+.pronouns-grid { display: grid; gap: 8px; width: 100%; overflow: hidden; flex: 1; }
+.pronouns-grid.singular { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); }
+.pronouns-grid.plural { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(2, 1fr); }
+.pronoun-card { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: all 0.3s ease; overflow: hidden; height: 100%; position: relative; }
+.pronoun-card:hover { transform: scale(1.03); }
+.pronoun-image { width: 100%; height: 85%; border-radius: 8px; object-fit: cover; object-position: center 30%; border: 2px solid #F1C405; box-shadow: 0 2px 10px rgba(241,196,5,0.3); transition: all 0.3s ease; }
+.pronoun-card:hover .pronoun-image { border-color: #39D4FA; box-shadow: 0 4px 15px rgba(57,212,250,0.4); }
+.pronoun-label { font-size: 11px; font-weight: 800; color: #F1C405; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; background: rgba(5,4,106,0.9); padding: 3px 8px; border-radius: 4px; text-align: center; width: 100%; }
+
+/* ===== VOCAB PRACTICE: CELEBRITY SWITCH ===== */
+#slide-3 { background: linear-gradient(135deg, #05046A 0%, #0a0a8a 100%); }
+.celeb-grid-layout { display: flex; flex-direction: column; gap: 10px; height: 100%; }
+.celeb-instructions { background: rgba(241,196,5,0.1); border: 1px solid rgba(241,196,5,0.3); border-radius: 10px; padding: 10px 16px; flex-shrink: 0; font-size: 12px; color: rgba(255,255,255,0.85); }
+.celeb-instructions strong { color: #F1C405; }
+.celeb-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; flex: 1; min-height: 0; }
+.celeb-tile { display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; border: 2px solid rgba(255,255,255,0.1); cursor: pointer; transition: all 0.2s; }
+.celeb-tile:hover { border-color: rgba(241,196,5,0.6); transform: scale(1.03); }
+.celeb-tile.revealed { border-color: #F1C405; }
+.celeb-tile-img { flex: 1; overflow: hidden; min-height: 0; }
+.celeb-tile-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.celeb-tile-footer { background: rgba(5,4,106,0.92); padding: 8px 6px; text-align: center; flex-shrink: 0; }
+.celeb-tile-name { font-size: 13px; font-weight: 800; color: white; line-height: 1.2; }
+.celeb-tile-pronoun { font-size: 20px; font-weight: 900; color: #F1C405; margin-top: 4px; opacity: 0; transition: opacity 0.3s; }
+.celeb-tile.revealed .celeb-tile-pronoun { opacity: 1; }
+.btn-pill { padding: 8px 20px; border-radius: 100px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; transition: all 0.2s; }
+.btn-pill.yellow { background: #F1C405; color: #05046A; }
+.btn-pill.yellow:hover { background: #d4a800; }
+.btn-pill.outline { background: transparent; border: 2px solid rgba(255,255,255,0.3); color: white; }
+.btn-pill.outline:hover { border-color: #F1C405; color: #F1C405; }
+.celeb-bottom { display: flex; justify-content: center; gap: 10px; flex-shrink: 0; }
+
+/* ===== GRAMMAR 1: A vs AN ===== */
+#slide-4 { background: linear-gradient(140deg, #05046A, #07068A); }
+.avan-layout { display: flex; flex-direction: column; gap: 14px; height: 100%; }
+.avan-rule { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-shrink: 0; }
+.avan-rule-box { border-radius: 14px; padding: 16px; text-align: center; }
+.avan-rule-box.a-box { background: rgba(57,212,250,0.15); border: 2px solid #39D4FA; }
+.avan-rule-box.an-box { background: rgba(241,196,5,0.15); border: 2px solid #F1C405; }
+.avan-article { font-size: 48px; font-weight: 900; }
+.avan-rule-box.a-box .avan-article { color: #39D4FA; }
+.avan-rule-box.an-box .avan-article { color: #F1C405; }
+.avan-rule-text { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 600; margin-top: 4px; }
+.avan-words { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; flex: 1; align-content: start; overflow: hidden; }
+.avan-word-card { border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s; border: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.06); }
+.avan-word-card:hover { transform: scale(1.05); }
+.avan-word-card.revealed-a { background: rgba(57,212,250,0.2); border-color: #39D4FA; }
+.avan-word-card.revealed-an { background: rgba(241,196,5,0.2); border-color: #F1C405; }
+.avan-word { font-size: 15px; font-weight: 800; color: rgba(255,255,255,0.6); transition: all 0.3s; }
+.avan-word-card.revealed-a .avan-word,
+.avan-word-card.revealed-an .avan-word { opacity: 0; height: 0; overflow: hidden; margin: 0; font-size: 0; }
+.avan-answer { font-size: 16px; font-weight: 900; margin-top: 2px; opacity: 0; transition: opacity 0.3s; line-height: 1.2; }
+.avan-word-card.revealed-a .avan-answer { opacity: 1; color: #39D4FA; }
+.avan-word-card.revealed-an .avan-answer { opacity: 1; color: #F1C405; }
+.avan-reset { display: flex; justify-content: center; flex-shrink: 0; }
+
+/* ===== GRAMMAR 2: VERB TO BE AFF/NEG ===== */
+#slide-5 { background: linear-gradient(135deg, #05046A 0%, #0a0a8a 100%); }
+.grammar-container { flex: 1; display: flex; flex-direction: column; padding: 10px 20px 14px; gap: 8px; overflow: hidden; }
+.grammar-title { font-size: 28px; font-weight: 900; color: #F1C405; text-align: center; flex-shrink: 0; }
+.grammar-content { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; overflow: hidden; }
+.grammar-column { display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
+.grammar-column-title { font-size: 20px; font-weight: 800; color: #39D4FA; text-align: center; text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; padding: 8px; background: rgba(57,212,250,0.1); border-radius: 8px; }
+.grammar-section { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.grammar-section-title { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; padding: 2px 0; flex-shrink: 0; }
+.grammar-item { display: grid; grid-template-columns: 70px 100px 1fr 110px; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 0 14px; border-left: 4px solid rgba(241,196,5,0.5); flex: 1; min-height: 0; }
+.grammar-pronoun { font-size: 20px; font-weight: 900; color: #F1C405; }
+.grammar-form { font-size: 20px; font-weight: 800; color: #39D4FA; }
+.grammar-example { font-size: 17px; color: rgba(255,255,255,0.8); font-style: italic; }
+.grammar-contraction { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.55); text-align: right; }
+
+/* ===== GRAM PRACTICE 1: TWO TRUTHS AND A LIE ===== */
+#slide-6 { background: linear-gradient(140deg, #05046A, #07068A); }
+.ttl-layout { display: flex; flex-direction: column; gap: 10px; height: 100%; }
+.ttl-instructions { background: rgba(241,196,5,0.1); border: 1px solid rgba(241,196,5,0.3); border-radius: 12px; padding: 14px 20px; flex-shrink: 0; }
+.ttl-instructions p { font-size: 17px; color: rgba(255,255,255,0.9); line-height: 1.5; }
+.ttl-instructions strong { color: #F1C405; }
+.ttl-template { background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 20px; flex-shrink: 0; }
+.ttl-template-title { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.ttl-examples { display: flex; flex-direction: column; gap: 10px; }
+.ttl-example { display: flex; align-items: center; gap: 14px; }
+.ttl-num { width: 32px; height: 32px; border-radius: 50%; background: #F1C405; color: #05046A; font-size: 16px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ttl-sentence { font-size: 20px; color: white; font-weight: 600; }
+.ttl-lie-badge { background: rgba(248,113,113,0.2); border: 1px solid #f87171; color: #f87171; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 10px; flex-shrink: 0; }
+.ttl-structure { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; }
+.ttl-struct-box { background: rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-around; }
+.ttl-struct-title { font-size: 17px; font-weight: 800; color: #39D4FA; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+.ttl-struct-item { font-size: 19px; color: rgba(255,255,255,0.85); padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.ttl-struct-item:last-child { border-bottom: none; }
+.ttl-struct-item span { color: #F1C405; font-weight: 700; }
+
+/* ===== GRAMMAR 3: YES/NO QUESTIONS ===== */
+#slide-7 { background: linear-gradient(135deg, #05046A 0%, #0a0a8a 100%); }
+.ynq-layout { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+.ynq-rule { background: rgba(241,196,5,0.1); border: 2px solid rgba(241,196,5,0.4); border-radius: 14px; padding: 16px 24px; flex-shrink: 0; text-align: center; }
+.ynq-rule-title { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.ynq-formula { font-size: 24px; font-weight: 900; color: white; }
+.ynq-formula span { color: #F1C405; }
+.ynq-arrow { color: rgba(255,255,255,0.4); margin: 0 10px; }
+.ynq-table { flex: 1; overflow: hidden; display: flex; flex-direction: column; gap: 5px; }
+.ynq-row { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 8px; align-items: stretch; flex: 1; min-height: 0; }
+.ynq-row.header { flex: 0 0 28px; }
+.ynq-row.header .ynq-cell { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; background: transparent; display: flex; align-items: center; }
+.ynq-cell { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 0 16px; font-size: 19px; display: flex; align-items: center; }
+.ynq-cell.pronoun { background: rgba(241,196,5,0.1); border: 1px solid rgba(241,196,5,0.3); color: #F1C405; font-weight: 900; font-size: 22px; justify-content: center; }
+.ynq-cell.question { color: #39D4FA; font-weight: 700; }
+.ynq-cell.answer { color: rgba(255,255,255,0.85); }
+.ynq-intonation { background: rgba(57,212,250,0.1); border: 1px solid rgba(57,212,250,0.3); border-radius: 10px; padding: 12px 20px; flex-shrink: 0; text-align: center; font-size: 17px; color: rgba(255,255,255,0.85); }
+.ynq-intonation strong { color: #39D4FA; }
+
+/* ===== GRAM PRACTICE 2: GUESS WHO ===== */
+#slide-8 { background: linear-gradient(140deg, #05046A, #07068A); }
+.gw-layout { display: flex; flex-direction: column; gap: 10px; height: 100%; }
+.gw-instructions { background: rgba(241,196,5,0.1); border: 1px solid rgba(241,196,5,0.3); border-radius: 10px; padding: 12px 18px; flex-shrink: 0; font-size: 16px; color: rgba(255,255,255,0.9); line-height: 1.5; }
+.gw-instructions strong { color: #F1C405; }
+.gw-cards-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; flex: 1; overflow: hidden; }
+.gw-card { background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s; overflow: hidden; }
+.gw-card:hover { border-color: rgba(241,196,5,0.5); background: rgba(241,196,5,0.06); }
+.gw-card.selected { border-color: #F1C405; background: rgba(241,196,5,0.1); }
+.gw-card-name { font-size: 20px; font-weight: 900; color: #F1C405; text-align: center; }
+.gw-card-info { font-size: 15px; color: rgba(255,255,255,0.75); text-align: center; line-height: 1.6; }
+.gw-card-info span { display: block; }
+.gw-card-info .gw-occ { color: #39D4FA; font-weight: 700; font-size: 16px; }
+.gw-question-area { background: rgba(255,255,255,0.06); border: 2px solid rgba(57,212,250,0.3); border-radius: 12px; padding: 12px 18px; flex-shrink: 0; }
+.gw-q-title { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.gw-q-examples { display: flex; flex-wrap: wrap; gap: 8px; }
+.gw-q-example { background: rgba(57,212,250,0.1); border: 1px solid rgba(57,212,250,0.3); color: #39D4FA; padding: 7px 16px; border-radius: 20px; font-size: 15px; font-weight: 600; }
+
+/* ===== EXIT TICKET: FICTIONAL ALTER EGO ===== */
+#slide-9 { background: linear-gradient(140deg, #05046A, #07068A); }
+.et-layout { display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.et-title { font-size: 28px; font-weight: 900; color: #F1C405; text-align: center; flex-shrink: 0; }
+.et-instructions { background: rgba(255,255,255,0.06); border-radius: 12px; padding: 16px 20px; flex-shrink: 0; font-size: 18px; color: rgba(255,255,255,0.9); line-height: 1.6; }
+.et-instructions strong { color: #F1C405; }
+.et-template { background: rgba(241,196,5,0.1); border: 2px solid rgba(241,196,5,0.4); border-radius: 14px; padding: 20px 24px; flex-shrink: 0; }
+.et-template-title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+.et-lines { display: flex; flex-direction: column; gap: 14px; }
+.et-line { font-size: 22px; font-weight: 700; color: white; }
+.et-line span { color: #F1C405; font-style: italic; }
+.et-example { background: rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 22px; flex: 1; }
+.et-example-title { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.et-example-name { font-size: 26px; font-weight: 900; color: #39D4FA; margin-bottom: 12px; }
+.et-example-sentences { display: flex; flex-direction: column; gap: 12px; }
+.et-example-sentence { font-size: 20px; color: rgba(255,255,255,0.9); padding-left: 16px; border-left: 4px solid rgba(241,196,5,0.5); }
+
+/* ===== HOMEWORK ===== */
+#slide-10 { background: linear-gradient(140deg, #05046A, #07068A); }
+.hw-layout { display: flex; flex-direction: column; gap: 14px; height: 100%; justify-content: center; align-items: center; padding: 20px; }
+.hw-title { font-size: 28px; font-weight: 900; color: #F1C405; text-align: center; }
+.hw-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; max-width: 800px; }
+.hw-card { border-radius: 16px; padding: 20px; text-align: center; }
+.hw-card.c1 { background: rgba(57,212,250,0.15); border: 2px solid #39D4FA; }
+.hw-card.c2 { background: rgba(241,196,5,0.15); border: 2px solid #F1C405; }
+.hw-card.c3 { background: rgba(74,222,128,0.15); border: 2px solid #4ade80; }
+.hw-card-page { font-size: 36px; font-weight: 900; margin-bottom: 6px; }
+.hw-card.c1 .hw-card-page { color: #39D4FA; }
+.hw-card.c2 .hw-card-page { color: #F1C405; }
+.hw-card.c3 .hw-card-page { color: #4ade80; }
+.hw-card-topic { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); }
+.hw-card-detail { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+.hw-note { font-size: 13px; color: rgba(255,255,255,0.6); text-align: center; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <button class="nav-btn" id="prevBtn" onclick="prevSlide()" disabled>◀</button>
+  <div class="nav-pills" id="navPills"></div>
+  <button class="nav-btn" id="nextBtn" onclick="nextSlide()">▶</button>
+</div>
+
+<div class="slides-wrapper">
+
+<!-- SLIDE 0: COVER -->
+<div class="slide active" id="slide-0">
+  <div class="cover-image-container">
+    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/aQYzMCWIiuuipYsr.jpg" alt="Cover">
+    <div class="cover-info-overlay">
+      <div class="cover-label">GO Seniors · L1 · Unit 1</div>
+      <div class="cover-title">Pronouns &amp; <span>Grammar</span></div>
+      <div class="cover-meta">Session 3 · Verb To Be · 60 min</div>
+    </div>
+  </div>
+  <div class="cover-buttons">
+    <button class="cover-btn" style="background:#7B4FBE" onclick="goTo(1)">
+      <span class="cover-btn-label">Warm-up</span>
+      <span class="cover-btn-sub">The Time Machine</span>
+    </button>
+    <button class="cover-btn" style="background:#1565C0" onclick="goTo(2)">
+      <span class="cover-btn-label">Vocabulary</span>
+      <span class="cover-btn-sub">Pronouns</span>
+    </button>
+    <button class="cover-btn" style="background:#00ACC1" onclick="goTo(3)">
+      <span class="cover-btn-label">Vocab Practice</span>
+      <span class="cover-btn-sub">Celebrity Switch</span>
+    </button>
+    <button class="cover-btn" style="background:#2E7D32" onclick="goTo(4)">
+      <span class="cover-btn-label">Grammar 1</span>
+      <span class="cover-btn-sub">A vs. AN</span>
+    </button>
+    <button class="cover-btn" style="background:#E53935" onclick="goTo(5)">
+      <span class="cover-btn-label">Grammar 2</span>
+      <span class="cover-btn-sub">Verb To Be</span>
+    </button>
+    <button class="cover-btn" style="background:#F9A825; color:#05046A" onclick="goTo(6)">
+      <span class="cover-btn-label" style="color:#05046A">Gram Practice 1</span>
+      <span class="cover-btn-sub" style="color:rgba(5,4,106,0.7)">Two Truths &amp; a Lie</span>
+    </button>
+    <button class="cover-btn" style="background:#7C4DFF" onclick="goTo(7)">
+      <span class="cover-btn-label">Grammar 3</span>
+      <span class="cover-btn-sub">Yes/No Questions</span>
+    </button>
+    <button class="cover-btn" style="background:#D81B60" onclick="goTo(8)">
+      <span class="cover-btn-label">Gram Practice 2</span>
+      <span class="cover-btn-sub">Guess Who?</span>
+    </button>
+    <button class="cover-btn" style="background:#00695C" onclick="goTo(9)">
+      <span class="cover-btn-label">Exit Ticket</span>
+      <span class="cover-btn-sub">Fictional Alter Ego</span>
+    </button>
+    <button class="cover-btn" style="background:#37474F" onclick="goTo(10)">
+      <span class="cover-btn-label">Homework</span>
+      <span class="cover-btn-sub">Book pp. 8–10</span>
+    </button>
+  </div>
+</div>
+
+<!-- SLIDE 1: WARM-UP TIME MACHINE -->
+<div class="slide" id="slide-1">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#F1C405;">WARM-UP</span>
+      <span class="header-title">The Time Machine</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Page: None</span>
+      <span class="slide-counter">2 / 11</span>
+    </div>
+  </div>
+  <div class="slide-body">
+    <div class="time-machine-layout">
+      <div class="tm-eras">
+        <div class="tm-era" onclick="selectEra(this)">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/GrCNxAEMMGDTcyCq.jpg" alt="70s">
+          <div class="tm-era-label">
+            <div class="tm-era-year">1970s</div>
+            <div class="tm-era-name">Disco Era</div>
+          </div>
+        </div>
+        <div class="tm-era" onclick="selectEra(this)">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/YfQFqbMylhOmxSml.jpg" alt="90s">
+          <div class="tm-era-label">
+            <div class="tm-era-year">1990s</div>
+            <div class="tm-era-name">Arcade Era</div>
+          </div>
+        </div>
+        <div class="tm-era" onclick="selectEra(this)">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/vjAFsIReFMbORIvM.jpg" alt="2050">
+          <div class="tm-era-label">
+            <div class="tm-era-year">2050</div>
+            <div class="tm-era-name">The Future</div>
+          </div>
+        </div>
+      </div>
+      <div class="tm-template">
+        <div class="tm-template-text">"I would like to be in <span id="selectedEra">[era]</span> because of <span id="selectedReason">[reason]</span>."</div>
+        <div class="tm-reasons">
+          <div class="tm-reason" onclick="selectReason(this)">the music 🎵</div>
+          <div class="tm-reason" onclick="selectReason(this)">the clothes 👗</div>
+          <div class="tm-reason" onclick="selectReason(this)">the technology 💻</div>
+          <div class="tm-reason" onclick="selectReason(this)">the cars 🚗</div>
+          <div class="tm-reason" onclick="selectReason(this)">the movies 🎬</div>
+          <div class="tm-reason" onclick="selectReason(this)">the history 📚</div>
+          <div class="tm-reason" onclick="selectReason(this)">the style ✨</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: VOCABULARY - PRONOUNS -->
+<div class="slide" id="slide-2">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#F1C405;">VOCABULARY</span>
+      <span class="header-title">Personal Pronouns</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Page 8</span>
+      <span class="slide-counter">3 / 11</span>
+    </div>
+  </div>
+  <div class="vocab-container">
+    <div class="vocab-title">Personal Pronouns</div>
+    <div class="pronouns-container">
+      <div class="pron-column">
+        <div class="pron-column-title">Singular</div>
+        <div class="pronouns-grid singular">
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_i_pointing_self_horizontal-PPsAkDWGZ5qBwzYrGbLBUz.webp" alt="I" class="pronoun-image">
+            <span class="pronoun-label">I</span>
+          </div>
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_you_pointing_forward-iad6vgAKQ6tsSBAPGYmuDR.webp" alt="You" class="pronoun-image">
+            <span class="pronoun-label">You</span>
+          </div>
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_he_vertical-B7cJQc6Yk3nF2jpV9LeYwf.webp" alt="He" class="pronoun-image">
+            <span class="pronoun-label">He</span>
+          </div>
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_she_vertical-PQEQ99oL5cuqi4Bjpgwbsc.webp" alt="She" class="pronoun-image">
+            <span class="pronoun-label">She</span>
+          </div>
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_it_object-RNZfy48XiDK7KrGYCeJBiW.webp" alt="It - Object" class="pronoun-image">
+            <span class="pronoun-label">It (Object)</span>
+          </div>
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_it_animal-GZuFddnPJfdeuiW2EPpiNi.webp" alt="It - Animal" class="pronoun-image">
+            <span class="pronoun-label">It (Animal)</span>
+          </div>
+        </div>
+      </div>
+      <div class="pron-column">
+        <div class="pron-column-title">Plural</div>
+        <div class="pronouns-grid plural">
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_we-kZmUnYKHS5StgeF3i7nzx9.webp" alt="We" class="pronoun-image">
+            <span class="pronoun-label">We</span>
+          </div>
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_you_plural-JEExwdjNU8sbvPs2F3dWka.webp" alt="You (plural)" class="pronoun-image">
+            <span class="pronoun-label">You (plural)</span>
+          </div>
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_they_people_new-n2HbEc6gX5XaCsxr5hxwuj.webp" alt="They - People" class="pronoun-image">
+            <span class="pronoun-label">They (People)</span>
+          </div>
+          <div class="pronoun-card">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032594173/cCLiQmHEYsbKcsvaNAspWZ/pronoun_they_objects-ASXSpx3CVUYGiU3MkDiwSH.webp" alt="They - Objects" class="pronoun-image">
+            <span class="pronoun-label">They (Objects)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: VOCAB PRACTICE - CELEBRITY SWITCH -->
+<div class="slide" id="slide-3">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#F1C405;">VOCAB PRACTICE</span>
+      <span class="header-title">The Celebrity Switch</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Page 8</span>
+      <span class="slide-counter">4 / 11</span>
+    </div>
+  </div>
+  <div class="slide-body">
+    <div class="celeb-grid-layout">
+      <div class="celeb-instructions"><strong>Celebrity Switch:</strong> Look at each person or thing. What pronoun do we use? Click each card to reveal the answer!</div>
+      <div class="celeb-grid" id="celebGrid"></div>
+      <div class="celeb-bottom">
+        <button class="btn-pill outline" onclick="resetCelebGrid()">🔄 Reset</button>
+        <button class="btn-pill yellow" onclick="revealAllCelebs()">Reveal All</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: GRAMMAR 1 - A vs AN -->
+<div class="slide" id="slide-4">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#4ade80; color:#05046A;">GRAMMAR 1</span>
+      <span class="header-title">A vs. AN — The Visual Rule</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Page 10</span>
+      <span class="slide-counter">5 / 11</span>
+    </div>
+  </div>
+  <div class="slide-body">
+    <div class="avan-layout">
+      <div class="avan-rule">
+        <div class="avan-rule-box a-box">
+          <div class="avan-article">A</div>
+          <div class="avan-rule-text">+ Consonant sound<br><em>a car, a teacher, a book</em></div>
+        </div>
+        <div class="avan-rule-box an-box">
+          <div class="avan-article">AN</div>
+          <div class="avan-rule-text">+ Vowel sound (A, E, I, O, U)<br><em>an apple, an engineer, an actor</em></div>
+        </div>
+      </div>
+      <div class="avan-words" id="avanWords"></div>
+      <div class="avan-reset">
+        <button class="btn-pill outline" onclick="resetAvan()">🔄 Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: GRAMMAR 2 - VERB TO BE AFF/NEG -->
+<div class="slide" id="slide-5">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#F1C405;">GRAMMAR 2</span>
+      <span class="header-title">Verb TO BE — Affirmative &amp; Negative</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Page 9</span>
+      <span class="slide-counter">6 / 11</span>
+    </div>
+  </div>
+  <div class="grammar-container">
+    <div class="grammar-title">The Verb TO BE</div>
+    <div class="grammar-content">
+      <div class="grammar-column">
+        <div class="grammar-column-title">✅ Affirmative</div>
+        <div class="grammar-section">
+          <div class="grammar-section-title">Singular</div>
+          <div class="grammar-item"><span class="grammar-pronoun">I</span><span class="grammar-form">am</span><span class="grammar-example">I am a student.</span><span class="grammar-contraction">I'm</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">You</span><span class="grammar-form">are</span><span class="grammar-example">You are happy.</span><span class="grammar-contraction">you're</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">He</span><span class="grammar-form">is</span><span class="grammar-example">He is a teacher.</span><span class="grammar-contraction">he's</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">She</span><span class="grammar-form">is</span><span class="grammar-example">She is a nurse.</span><span class="grammar-contraction">she's</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">It</span><span class="grammar-form">is</span><span class="grammar-example">It is a book.</span><span class="grammar-contraction">it's</span></div>
+        </div>
+        <div class="grammar-section">
+          <div class="grammar-section-title">Plural</div>
+          <div class="grammar-item"><span class="grammar-pronoun">We</span><span class="grammar-form">are</span><span class="grammar-example">We are friends.</span><span class="grammar-contraction">we're</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">You</span><span class="grammar-form">are</span><span class="grammar-example">You are students.</span><span class="grammar-contraction">you're</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">They</span><span class="grammar-form">are</span><span class="grammar-example">They are athletes.</span><span class="grammar-contraction">they're</span></div>
+        </div>
+      </div>
+      <div class="grammar-column">
+        <div class="grammar-column-title">❌ Negative</div>
+        <div class="grammar-section">
+          <div class="grammar-section-title">Singular</div>
+          <div class="grammar-item"><span class="grammar-pronoun">I</span><span class="grammar-form">am not</span><span class="grammar-example">I am not tired.</span><span class="grammar-contraction">I'm not</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">You</span><span class="grammar-form">are not</span><span class="grammar-example">You are not late.</span><span class="grammar-contraction">you're not</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">He</span><span class="grammar-form">is not</span><span class="grammar-example">He is not sick.</span><span class="grammar-contraction">he's not</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">She</span><span class="grammar-form">is not</span><span class="grammar-example">She is not here.</span><span class="grammar-contraction">she's not</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">It</span><span class="grammar-form">is not</span><span class="grammar-example">It is not broken.</span><span class="grammar-contraction">it's not</span></div>
+        </div>
+        <div class="grammar-section">
+          <div class="grammar-section-title">Plural</div>
+          <div class="grammar-item"><span class="grammar-pronoun">We</span><span class="grammar-form">are not</span><span class="grammar-example">We are not ready.</span><span class="grammar-contraction">we're not</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">You</span><span class="grammar-form">are not</span><span class="grammar-example">You are not wrong.</span><span class="grammar-contraction">you're not</span></div>
+          <div class="grammar-item"><span class="grammar-pronoun">They</span><span class="grammar-form">are not</span><span class="grammar-example">They are not busy.</span><span class="grammar-contraction">they're not</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: GRAM PRACTICE 1 - TWO TRUTHS AND A LIE -->
+<div class="slide" id="slide-6">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#f87171; color:#fff;">GRAM PRACTICE 1</span>
+      <span class="header-title">Two Truths and a Lie — Family Edition</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Page 9</span>
+      <span class="slide-counter">7 / 11</span>
+    </div>
+  </div>
+  <div class="slide-body">
+    <div class="ttl-layout">
+      <div class="ttl-instructions">
+        <p>Write <strong>6 sentences</strong> using Verb To Be: <strong>3 about yourself</strong> and <strong>3 about a family member</strong>. One sentence in each block must be a <strong>lie</strong>! The class will guess which one.</p>
+      </div>
+      <div class="ttl-template">
+        <div class="ttl-template-title">📝 Teacher's Example</div>
+        <div class="ttl-examples">
+          <div class="ttl-example"><div class="ttl-num">1</div><div class="ttl-sentence">I am a teacher.</div></div>
+          <div class="ttl-example"><div class="ttl-num">2</div><div class="ttl-sentence">I am not a rockstar.</div></div>
+          <div class="ttl-example"><div class="ttl-num">3</div><div class="ttl-sentence">I am a pilot. <span class="ttl-lie-badge">LIE!</span></div></div>
+        </div>
+      </div>
+      <div class="ttl-structure">
+        <div class="ttl-struct-box">
+          <div class="ttl-struct-title">About Yourself</div>
+          <div class="ttl-struct-item">I <span>am</span> a ___________.</div>
+          <div class="ttl-struct-item">I <span>am not</span> a ___________.</div>
+          <div class="ttl-struct-item">I <span>am</span> / <span>am not</span> ___________.</div>
+        </div>
+        <div class="ttl-struct-box">
+          <div class="ttl-struct-title">About a Family Member</div>
+          <div class="ttl-struct-item">My [brother/sister] <span>is</span> a ___________.</div>
+          <div class="ttl-struct-item">My [mom/dad] <span>is not</span> a ___________.</div>
+          <div class="ttl-struct-item">They <span>are</span> / <span>are not</span> ___________.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: GRAMMAR 3 - YES/NO QUESTIONS -->
+<div class="slide" id="slide-7">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#F1C405;">GRAMMAR 3</span>
+      <span class="header-title">Verb TO BE — Yes/No Questions</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Page 10</span>
+      <span class="slide-counter">8 / 11</span>
+    </div>
+  </div>
+  <div class="slide-body">
+    <div class="ynq-layout">
+      <div class="ynq-rule">
+        <div class="ynq-rule-title">The Verb JUMPS to the beginning!</div>
+        <div class="ynq-formula">
+          <span style="color:#39D4FA">You are</span> a student.
+          <span class="ynq-arrow">→</span>
+          <span style="color:#F1C405">Are you</span> a student?
+        </div>
+      </div>
+      <div class="ynq-table">
+        <div class="ynq-row header">
+          <div class="ynq-cell">Pronoun</div>
+          <div class="ynq-cell">Question</div>
+          <div class="ynq-cell">Short Answer</div>
+        </div>
+        <div class="ynq-row">
+          <div class="ynq-cell pronoun">I</div>
+          <div class="ynq-cell question">Am I late?</div>
+          <div class="ynq-cell answer">Yes, you are. / No, you're not.</div>
+        </div>
+        <div class="ynq-row">
+          <div class="ynq-cell pronoun">You</div>
+          <div class="ynq-cell question">Are you a student?</div>
+          <div class="ynq-cell answer">Yes, I am. / No, I'm not.</div>
+        </div>
+        <div class="ynq-row">
+          <div class="ynq-cell pronoun">He</div>
+          <div class="ynq-cell question">Is he a doctor?</div>
+          <div class="ynq-cell answer">Yes, he is. / No, he's not.</div>
+        </div>
+        <div class="ynq-row">
+          <div class="ynq-cell pronoun">She</div>
+          <div class="ynq-cell question">Is she from Paris?</div>
+          <div class="ynq-cell answer">Yes, she is. / No, she's not.</div>
+        </div>
+        <div class="ynq-row">
+          <div class="ynq-cell pronoun">It</div>
+          <div class="ynq-cell question">Is it a cat?</div>
+          <div class="ynq-cell answer">Yes, it is. / No, it's not.</div>
+        </div>
+        <div class="ynq-row">
+          <div class="ynq-cell pronoun">We</div>
+          <div class="ynq-cell question">Are we ready?</div>
+          <div class="ynq-cell answer">Yes, we are. / No, we're not.</div>
+        </div>
+        <div class="ynq-row">
+          <div class="ynq-cell pronoun">They</div>
+          <div class="ynq-cell question">Are they friends?</div>
+          <div class="ynq-cell answer">Yes, they are. / No, they're not.</div>
+        </div>
+      </div>
+      <div class="ynq-intonation">⬆️ <strong>Rising intonation</strong> at the end of every question! "Are you a student <strong>↗</strong>?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: GRAM PRACTICE 2 - GUESS WHO -->
+<div class="slide" id="slide-8">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#D81B60;">GRAM PRACTICE 2</span>
+      <span class="header-title">Guess Who?</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Page 10</span>
+      <span class="slide-counter">9 / 11</span>
+    </div>
+  </div>
+  <div class="slide-body">
+    <div class="gw-layout">
+      <div class="gw-instructions">
+        One student secretly chooses a character. Another student has a <strong>maximum of 4 Yes/No questions</strong> to guess who it is. Only short answers allowed: <strong>"Yes, I am / No, I'm not / Yes, she is / No, he isn't."</strong>
+      </div>
+      <div class="gw-cards-grid" id="gwCardsGrid"></div>
+      <div class="gw-question-area">
+        <div class="gw-q-title">💬 Sample Questions</div>
+        <div class="gw-q-examples">
+          <div class="gw-q-example">Are you 25 years old?</div>
+          <div class="gw-q-example">Is she a teacher?</div>
+          <div class="gw-q-example">Are you from Mexico?</div>
+          <div class="gw-q-example">Is he a doctor?</div>
+          <div class="gw-q-example">Are they from Canada?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: EXIT TICKET - FICTIONAL ALTER EGO -->
+<div class="slide" id="slide-9">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#4ade80; color:#05046A;">EXIT TICKET</span>
+      <span class="header-title">The Fictional Alter Ego</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Pages 8–10</span>
+      <span class="slide-counter">10 / 11</span>
+    </div>
+  </div>
+  <div class="slide-body">
+    <div class="et-layout">
+      <div class="et-instructions">
+        Choose a <strong>famous character</strong> (cartoon, movie, TV show) and say <strong>3 sentences</strong> about yourself <em>as that character</em>. Use at least one <strong>affirmative</strong> and one <strong>negative</strong> sentence. Include <strong>A / AN</strong>!
+      </div>
+      <div class="et-template">
+        <div class="et-template-title">📝 Your Template</div>
+        <div class="et-lines">
+          <div class="et-line">I am <span>[character name]</span>.</div>
+          <div class="et-line">I am <span>a / an</span> <span>[occupation/description]</span>.</div>
+          <div class="et-line">I am not <span>[something false about the character]</span>.</div>
+        </div>
+      </div>
+      <div class="et-example">
+        <div class="et-example-title">🎬 Teacher's Example</div>
+        <div class="et-example-name">Homer Simpson</div>
+        <div class="et-example-sentences">
+          <div class="et-example-sentence">I am Homer Simpson.</div>
+          <div class="et-example-sentence">I am a father and a worker.</div>
+          <div class="et-example-sentence">I am not smart — but I am funny!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: HOMEWORK -->
+<div class="slide" id="slide-10">
+  <div class="top-header">
+    <div class="header-left">
+      <span class="header-tag" style="background:#37474F;">HOMEWORK</span>
+      <span class="header-title">For Next Class</span>
+    </div>
+    <div class="header-right">
+      <span class="book-page">Book Pages 8–10</span>
+      <span class="slide-counter">11 / 11</span>
+    </div>
+  </div>
+  <div class="slide-body">
+    <div class="hw-layout">
+      <div class="hw-title">📚 Daily Homework</div>
+      <div class="hw-cards">
+        <div class="hw-card c1">
+          <div class="hw-card-page">p. 8</div>
+          <div class="hw-card-topic">Personal Pronouns</div>
+          <div class="hw-card-detail">All exercises</div>
+        </div>
+        <div class="hw-card c2">
+          <div class="hw-card-page">p. 9</div>
+          <div class="hw-card-topic">Verb To Be</div>
+          <div class="hw-card-detail">Affirmative &amp; Negative — All exercises</div>
+        </div>
+        <div class="hw-card c3">
+          <div class="hw-card-page">p. 10</div>
+          <div class="hw-card-topic">Yes/No Questions + A/AN</div>
+          <div class="hw-card-detail">All exercises</div>
+        </div>
+      </div>
+      <div class="hw-note">"Incredible session today! See you next class! 🎉"</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end slides-wrapper -->
+
+<script>
+let currentSlide = 0;
+const totalSlides = 11;
+
+const navLabels = ['Cover','Warm-up','Pronouns','Celebrity','A vs AN','Verb To Be','2 Truths','Yes/No Q','Guess Who','Exit Ticket','Homework'];
+
+// Build nav pills
+const navPills = document.getElementById('navPills');
+navLabels.forEach((label, i) => {
+  const pill = document.createElement('div');
+  pill.className = 'nav-pill' + (i === 0 ? ' active' : '');
+  pill.textContent = label;
+  pill.onclick = () => goTo(i);
+  navPills.appendChild(pill);
+});
+
+function goTo(n) {
+  currentSlide = n;
+  updateDisplay();
+}
+function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateDisplay(); } }
+function prevSlide() { if (currentSlide > 0) { currentSlide--; updateDisplay(); } }
+
+function updateDisplay() {
+  document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+  document.querySelectorAll('.nav-pill').forEach((p, i) => p.classList.toggle('active', i === currentSlide));
+  document.getElementById('prevBtn').disabled = currentSlide === 0;
+  document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+  if (currentSlide === 3) renderCeleb();
+  if (currentSlide === 4) renderAvan();
+  if (currentSlide === 8) renderGW();
+}
+
+// ===== TIME MACHINE =====
+function selectEra(el) {
+  document.querySelectorAll('.tm-era').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('selectedEra').textContent = el.querySelector('.tm-era-year').textContent;
+}
+function selectReason(el) {
+  document.querySelectorAll('.tm-reason').forEach(r => r.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('selectedReason').textContent = el.textContent;
+}
+
+// ===== CELEBRITY SWITCH =====
+const celebs = [
+  { name: 'Shakira', pronoun: 'She', img: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/ggjBfNOxUZoTRBcT.jpg' },
+  { name: 'Messi', pronoun: 'He', img: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/HVjLFmpFWvmiIAFD.jpg', pos: 'center 20%' },
+  { name: 'The Beatles', pronoun: 'They', img: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/JbnXpKpIsltdQfwW.jpg' },
+  { name: 'Beyoncé', pronoun: 'She', img: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/kDzKJGEQIEJgzfFB.jpg' },
+  { name: 'Einstein', pronoun: 'He', img: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/KnOHtNTVSwQNhSpB.jpg' },
+  { name: 'The Eiffel Tower', pronoun: 'It', img: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/NmrNpTUcOPByYKah.jpg' },
+  { name: 'The Penguins', pronoun: 'They', img: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663634713668/TFIUbOvUwrmtAUvi.jpg' }
+];
+function renderCeleb() {
+  const grid = document.getElementById('celebGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  celebs.forEach((c, i) => {
+    const tile = document.createElement('div');
+    tile.className = 'celeb-tile';
+    tile.innerHTML = `
+      <div class="celeb-tile-img"><img src="${c.img}" alt="${c.name}" style="object-position:${c.pos||'center top'}"></div>
+      <div class="celeb-tile-footer">
+        <div class="celeb-tile-name">${c.name}</div>
+        <div class="celeb-tile-pronoun">${c.pronoun}</div>
+      </div>`;
+    tile.onclick = () => tile.classList.toggle('revealed');
+    grid.appendChild(tile);
+  });
+}
+function revealAllCelebs() {
+  document.querySelectorAll('.celeb-tile').forEach(t => t.classList.add('revealed'));
+}
+function resetCelebGrid() {
+  document.querySelectorAll('.celeb-tile').forEach(t => t.classList.remove('revealed'));
+}
+
+// ===== A vs AN =====
+const avanData = [
+  { word: 'apple', article: 'AN' },
+  { word: 'car', article: 'A' },
+  { word: 'engineer', article: 'AN' },
+  { word: 'mechanic', article: 'A' },
+  { word: 'umbrella', article: 'AN' },
+  { word: 'book', article: 'A' },
+  { word: 'actor', article: 'AN' },
+  { word: 'teacher', article: 'A' },
+  { word: 'idea', article: 'AN' },
+  { word: 'doctor', article: 'A' },
+  { word: 'artist', article: 'AN' },
+  { word: 'nurse', article: 'A' },
+  { word: 'elephant', article: 'AN' },
+  { word: 'pilot', article: 'A' },
+  { word: 'office', article: 'AN' },
+  { word: 'university', article: 'A' },
+  { word: 'hour', article: 'AN' },
+  { word: 'banana', article: 'A' },
+  { word: 'island', article: 'AN' },
+  { word: 'map', article: 'A' }
+];
+function renderAvan() {
+  const grid = document.getElementById('avanWords');
+  if (grid.children.length > 0) return;
+  avanData.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'avan-word-card';
+    const fullPhrase = item.article + ' ' + item.word;
+    card.innerHTML = `<div class="avan-word">${item.word}</div><div class="avan-answer">${fullPhrase}</div>`;
+    card.onclick = () => {
+      card.classList.remove('revealed-a', 'revealed-an');
+      card.classList.add(item.article === 'A' ? 'revealed-a' : 'revealed-an');
+    };
+    grid.appendChild(card);
+  });
+}
+function resetAvan() {
+  document.querySelectorAll('.avan-word-card').forEach(c => c.classList.remove('revealed-a','revealed-an'));
+}
+
+// ===== GUESS WHO =====
+const gwCharacters = [
+  { name: 'Sofia', age: 25, occupation: 'Teacher', city: 'Madrid' },
+  { name: 'Carlos', age: 30, occupation: 'Chef', city: 'Mexico City' },
+  { name: 'Elena', age: 45, occupation: 'Doctor', city: 'Buenos Aires' },
+  { name: 'James', age: 38, occupation: 'Engineer', city: 'New York' },
+  { name: 'Mia', age: 22, occupation: 'Student', city: 'Paris' },
+  { name: 'Roberto', age: 55, occupation: 'Pilot', city: 'Rome' },
+  { name: 'Yuki', age: 33, occupation: 'Nurse', city: 'Tokyo' },
+  { name: 'Ahmed', age: 41, occupation: 'Architect', city: 'Cairo' },
+  { name: 'Lucia', age: 29, occupation: 'Journalist', city: 'Barcelona' },
+  { name: 'Tom', age: 50, occupation: 'Mechanic', city: 'London' }
+];
+function renderGW() {
+  const grid = document.getElementById('gwCardsGrid');
+  if (grid.children.length > 0) return;
+  gwCharacters.forEach(ch => {
+    const card = document.createElement('div');
+    card.className = 'gw-card';
+    card.innerHTML = `
+      <div class="gw-card-name">${ch.name}</div>
+      <div class="gw-card-info">
+        <span>${ch.age} years old</span>
+        <span class="gw-occ">${ch.occupation}</span>
+        <span>${ch.city}</span>
+      </div>`;
+    card.onclick = () => card.classList.toggle('selected');
+    grid.appendChild(card);
+  });
+}
+
+// Init
+updateDisplay();
+</script>
+</body>
+</html>
